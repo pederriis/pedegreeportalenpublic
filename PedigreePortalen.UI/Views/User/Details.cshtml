@@ -1,0 +1,132 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model PedigreePortalen.UI.Models.UserViewModel.UserDetails
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<a><img class="user_picture" src="~/Img/unnamed.png"></a>
+
+<dl class="user_details">
+    <dt class="col-sm-2">
+        Fornavn
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.FirstName)
+    </dd>
+    <dt class="col-sm-2">
+        Efternavn
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.LastName)
+    </dd>
+    <dt class="col-sm-2">
+        Email
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+    <dt class="col-sm-2">
+        Telefon
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.PhoneNo)
+    </dd>
+    <dt class="col-sm-2">
+        Vejnavn og nr
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Street)
+    </dd>
+    <dt class="col-sm-2">
+        By
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.City)
+    </dd>
+    <dt class="col-sm-2">
+        Postnr
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Zipcode)
+    </dd>
+    <dt class="col-sm-2">
+        ProfileText
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.ProfileText)
+    </dd>
+    <a class="edit_profil" asp-action="Edit" asp-route-userId="@Model.UserId" asp-route-id="@UserManager.GetUserId(User)">Ret Profil</a>
+</dl>
+
+<br />
+<div class="container center container_my_dogs">
+    <h4>Mine Hunde</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Kaldenavn
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Animals)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShortName)
+                    </td>
+                    <th></th>
+                    <td>
+                        <a asp-controller="Animal" asp-action="Details" asp-route-id="@item.AnimalId">Detaljer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        <a asp-controller="Animal" asp-route-id="@UserManager.GetUserId(User)" asp-action="Create">Opret ny Hund</a>
+    </p>
+</div>
+<br />
+<div class="container center container_my_dogs">
+    <h4>Mine Kuld</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Kuld Navn
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Litters)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LitterName)
+                    </td>
+                    <th></th>
+                    <td>
+                        <a asp-controller="Litter" asp-action="Details" asp-route-id="@item.LitterId">Detaljer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        <a asp-controller="Litter" asp-route-id="@UserManager.GetUserId(User)" asp-action="Create">Opret ny Kuld</a>
+    </p>
+</div>
+<br />
+<br />
+<br />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

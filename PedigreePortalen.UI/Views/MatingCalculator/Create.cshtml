@@ -1,0 +1,78 @@
+﻿@model IEnumerable<PedigreePortalen.UI.Models.MatingCalculatorDogViewModel.DetailsMatingCalculatorDog>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Parringskalkulatoren</h1>
+<h5>Vælg en han -og hunhun og tryk "Par" for at se en beregning over det forventede kuld.</h5>
+<h6>Er man logget ind, ser man kun sine egne hunde, ellers ser man alle hunde i databasen</h6>
+<br>
+<br>
+<p>
+
+
+</p>
+@*<style>
+        matingcalculatorselect {
+            width: 150px;
+            margin: 10px;
+        }
+
+            matingcalculatorselect:focus {
+                min-width: 150px;
+                width: auto;
+            }
+    </style>*@
+<div class="matingcalculatorselect-main">
+    <form asp-action="Details" asp-controller="MatingCalculator" method="post">
+
+        <table class="matingcalculatortable">
+            <tr>
+                <td>
+                    <div>
+                        <h6>Hanhunde </h6>
+
+                        <select class="matingcalculatorselect" name="fatherdogid" id="fatherdogid" size="10" required>
+                            @foreach (var item in Model.Where(x => x.Gender == true))
+                            {
+
+                                <option value=@item.DogId>@item.Name</option>
+                            }
+
+                        </select>
+                    </div>
+                </td>
+                <td>
+                <td>
+                    <div>
+                        <h6>Hunhunde</h6>
+
+                        <select class="matingcalculatorselect" name="motherdogid" id="motherdogid" size="10" required>
+                            @foreach (var item in Model.Where(x => x.Gender == false))
+                            {
+
+                                <option asp-for="MotherDogId" value=@item.DogId>@item.Name</option>
+                            }
+
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <button type="submit" title="send" class="btn btn-primary">Par!</button>
+                </td>
+
+            </tr>
+        </table>
+
+
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+   
+}
+

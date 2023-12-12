@@ -1,0 +1,113 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model PedigreePortalen.UI.Models.LitterViewModel.LitterDetails
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<br />
+<dl class="user_details">
+    <dt class="col-sm-2">
+        Kuld Navn
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.LitterName)
+    </dd>
+    <dt class="col-sm-2">
+        Kuld Fødselsdag
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.LitterBirthDate)
+    </dd>
+    <dt class="col-sm-2">
+        Parrings Dag
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.MatingDate)
+    </dd>
+    <a asp-action="Edit" asp-route-id="@Model.LitterId">Ret Kuld</a>
+</dl>
+
+<br />
+<div class="container center container_my_dogs">
+    @*<a asp-controller="Animal" asp-action="AddAnimalToLitter" asp-route-id="@UserManager.GetUserId(User)">Tilføj hund til litter</a>*@
+    <h4>Børn af @Html.DisplayFor(model => model.LitterName) </h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Stamtavle Navn
+                </th>
+                <th>
+                    Kaldenavn
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Animals)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PedigreeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShortName)
+                    </td>
+                    <th></th>
+                    <td>
+                        <a asp-controller="Animal" asp-action="Details" asp-route-id="@item.AnimalId">Detaljer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<div class="container center container_my_dogs">
+    <a asp-controller="Parenting" asp-action="Create" asp-route-id="@Model.LitterId">Opret Forældreskab</a>
+    <h4>Forældre af @Html.DisplayFor(model => model.LitterName) </h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Stamtavle Navn
+                </th>
+                <th>
+                    Kaldenavn
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Parentings)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Animal.PedigreeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Animal.ShortName)
+                    </td>
+                    <th></th>
+                    <td>
+                        <a asp-controller="Litter" asp-action="Details" asp-route-id="@item.LitterId">Detaljer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<br />
+<div>
+    <a asp-controller="User" asp-action="Details" asp-route-id="@UserManager.GetUserId(User)">Tilbage til Min Side</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

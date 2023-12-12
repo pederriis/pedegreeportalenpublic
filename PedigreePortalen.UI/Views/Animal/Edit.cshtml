@@ -1,0 +1,107 @@
+﻿@model PedigreePortalen.UI.Models.AnimalViewModel.DetailsAnimal
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="padding_top_bottom background_animal">
+    <div class="container center container_Cud">
+        <h1 class="text-center">Ret hund</h1>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="AnimalId" />
+                    <input type="hidden" asp-for="OwnerId" />
+
+                    @*<div class="form-group">
+                        <label asp-for="OwnerId" class="control-label">OwnerId</label>
+                        <input id="input_id" asp-for="OwnerId" class="form-control" />
+                        <span asp-validation-for="OwnerId" class="text-danger"></span>
+                    </div>*@
+                    <div class="form-group">
+                        <label asp-for="RegNo" class="control-label">Registreringsnummer</label>
+                        <input id="input_RegNo" asp-for="RegNo" class="form-control" type="text" placeholder="12544512" />
+                        <span asp-validation-for="RegNo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PedigreeName" class="control-label">Stambogsnavn</label>
+                        <input id="input_PedigreeName" asp-for="PedigreeName" class="form-control" placeholder="Piece of my heart Alba" />
+                        <span asp-validation-for="PedigreeName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShortName" class="control-label">Kaldenavn</label>
+                        <input id="input_ShortName" asp-for="ShortName" class="form-control" placeholder="Alba" />
+                        <span asp-validation-for="ShortName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BirthDate" class="control-label">Fødselsdag</label>
+                        <input id="input_BirthDate" asp-for="BirthDate" class="form-control" />
+                        <span id="input_BirthDate_validation" asp-validation-for="BirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DeathDate" class="control-label">Dødsdag</label>
+                        <input id="input_DeathDate" asp-for="DeathDate" class="form-control" />
+                        <span id="input_DeathDate_validation" asp-validation-for="DeathDate" class="text-danger"></span>
+                    </div>
+                    <label asp-for="Gender" class="control-label">Køn</label>
+                    <div class="form-check">
+                        <input asp-for="Gender" class="form-check-input" type="radio" value="true">
+                        <span id="input_Gender_validation" asp-validation-for="Gender" class="text-danger"></span>
+                        <label asp-for="Gender" class="form-check-label">
+                            Han
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="Gender" class="form-check-input" type="radio" value="false" checked>
+                        <span id="input_Gender_validation" asp-validation-for="Gender" class="text-danger"></span>
+                        <label asp-for="Gender" class="form-check-label">
+                            Hun
+                        </label>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="Color" class="control-label">Farve</label>
+                        <input id="input_Color" asp-for="Color" class="form-control" placeholder="chokofawn" />
+                        <span id="input_Color_validation" asp-validation-for="Color" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="WeightInKg" class="control-label">Vægt i Kg</label>
+                        <input id="input_WeightInKg" asp-for="WeightInKg" class="form-control" placeholder="4.5" />
+                        <span id="input_WeightInKg_validation" asp-validation-for="WeightInKg" class="text-danger"></span>
+                    </div>
+                    <label asp-for="IsBreedable" class="control-label">Avls Klar</label>
+                    <div class="form-check">
+                        <input asp-for="IsBreedable" class="form-check-input" type="radio" value="true">
+                        <label asp-for="IsBreedable" class="form-check-label">
+                            Ja
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="IsBreedable" class="form-check-input" type="radio" value="false" checked>
+                        <label asp-for="IsBreedable" class="form-check-label">
+                            Nej
+                        </label>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="ProfileText">Profiltext</label>
+                        <textarea asp-for="ProfileText" class="form-control" rows="3" placeholder="Jeg er en glad hund"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Gem" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center">
+            <a asp-action="Details" asp-route-id="@Model.AnimalId">Tilbage til Hund</a>
+            <p><a asp-controller="Animal" asp-action="Delete" asp-route-id="@Model.AnimalId">Slet Hund</a></p>
+        </div>
+    </div>
+</div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

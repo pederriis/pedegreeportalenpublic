@@ -1,0 +1,338 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model PedigreePortalen.UI.Models.AnimalViewModel.DetailsAnimal
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<a><img class="user_picture" src="~/Img/unnamed.png"></a>
+
+<dl class="user_details">
+    <dt class="col-sm-2">
+        Reg Nummer
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.RegNo)
+    </dd>
+    <dt class="col-sm-2">
+        Stambogs navn
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.PedigreeName)
+    </dd>
+    <dt class="col-sm-2">
+        Kaldenavn
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.ShortName)
+    </dd>
+    <dt class="col-sm-2">
+        Fødselsdag
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.BirthDate)
+    </dd>
+    <dt class="col-sm-2">
+        Dødsdag
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.DeathDate)
+    </dd>
+    <dt class="col-sm-2">
+        Køn
+    </dt>
+    <dd class="col-sm-10">
+        @if (Model.Gender == true)
+        {
+            <a>Han</a>
+        }
+        else
+        {
+            <a>Hun</a>
+        }
+    </dd>
+    <dt class="col-sm-2">
+        Farve
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Color)
+    </dd>
+    <dt class="col-sm-2">
+        Vægt i kg
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.WeightInKg)
+    </dd>
+    <dt class="col-sm-2">
+        Avls klar
+    </dt>
+    <dd class="col-sm-10">
+        @if (Model.IsBreedable == true)
+        {
+            <a>Ja</a>
+        }
+        else
+        {
+            <a>Nej</a>
+        }
+    </dd>
+    <dt class="col-sm-2">
+        ProfileText
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.ProfileText)
+    </dd>
+    <a asp-action="Edit" asp-route-id="@Model.AnimalId">Ret Hund</a>
+</dl>
+
+<div>
+    <a asp-controller="User" asp-action="Details" asp-route-id="@UserManager.GetUserId(User)">Tilbage til Min Side</a>
+    <br />
+    <a asp-controller="HealthRecord" asp-action="Details" asp-route-animalId="@Model.AnimalId">Sundhedsjournal</a>
+    <br />
+    <a asp-controller="Animal" asp-action="AddLitterToAnimal" asp-route-id="@UserManager.GetUserId(User)" asp-route-AnimalId="@Model.AnimalId">Tilføj kuld til hund</a>
+    <br />
+    <a asp-controller="Parenting" asp-action="AddParentingToLitter" asp-route-id="@UserManager.GetUserId(User)" asp-route-AnimalId="@Model.AnimalId">Opret Forældreskab</a>
+</div>
+<br>
+<div class="clear_both">
+    <table id="pedigree" class="pedigree ta_center">
+        <tbody>
+            <tr><th class="pedigreetitle">Pedigree - @Html.DisplayFor(model => model.PedigreeName)</th></tr>
+            <tr>
+                <td>
+                    <table class="pedigree_tree">
+                        <tbody>
+
+                            <!--Dette er den øverste række-->
+                            <tr>
+                                <td class="animal" colspan="8">
+                                    <div>
+                                        <div class="tree-photo-ingrus">
+                                            <a><img src="~/Img/banner.jpg" title=@Html.DisplayFor(model => model.PedigreeName)></a>
+                                        </div>
+                                    </div>
+                                    <p class="title_text">
+                                        @if (Model.Gender == true)
+                                        {
+                                            <img class="gender_img" src="~/Img/MaleSymbol.jpg" title="male">
+                                        }
+                                        else
+                                        {
+                                            <img class="gender_img" src="~/Img/Female_Symbol.jpg" title="female">
+                                        }
+                                        <a asp-controller="Animal" asp-action="Details" asp-route-id="@Model.AnimalId">
+                                            <b>
+                                                @Html.DisplayFor(model => model.PedigreeName)
+                                            </b>
+                                        </a>
+                                    </p>
+                                </td>
+                            </tr>
+
+                            @*Parrents*@
+                            <tr>
+                                <td colspan="4" class="animal">
+                                    <div class="male_animal">&nbsp;</div>
+                                    <div class="tree-photo-ingrus">
+                                        <a><img src="~/Img/banner.jpg" title=""></a>
+                                    </div>
+                                    <!--If child got 0 parrents-->
+                                    @if (Model.Litter.Parentings.Count == 0)
+                                    {
+                                        @*<a asp-controller="Parenting" asp-action="Create" asp-route-id="@UserManager.GetUserId(User)">Opret Forældre</a>*@
+                                        <a>Opret Forældre</a>
+                                    }
+                                    else
+                                    {
+                                        <p class="title_text">
+                                            @if (Model.Litter.Parentings[0].Animal.Gender == true)
+                                            {
+                                                <img class="gender_img" src="~/Img/MaleSymbol.jpg" title="male">
+                                            }
+                                            else
+                                            {
+                                                <img class="gender_img" src="~/Img/Female_Symbol.jpg" title="female">
+                                            }
+                                            <a asp-controller="Animal" asp-action="Details" asp-route-id="@Model.Litter.Parentings[0].Animal.AnimalId">
+                                                <b>
+                                                    @Html.DisplayFor(model => model.Litter.Parentings[0].Animal.PedigreeName)
+                                                </b>
+                                            </a>
+                                        </p>
+                                    }
+                                </td>
+
+                                <td colspan="4" class="animal">
+                                    <div class="female_animal">&nbsp;</div>
+                                    <div class="tree-photo-ingrus">
+                                        <a><img src="~/Img/banner.jpg" title=""></a>
+                                    </div>
+                                    <!--If child got 0 ore 1 parrents-->
+                                    @if (Model.Litter.Parentings.Count == 0 || Model.Litter.Parentings.Count == 1)
+                                    {
+                                        @*<a asp-controller="Parenting" asp-action="Create" asp-route-id="@UserManager.GetUserId(User)">Opret Forældre</a>*@
+                                        <a>Opret Forældre</a>
+                                    }
+                                    else
+                                    {
+                                        <p class="title_text">
+                                            @if (Model.Litter.Parentings[1].Animal.Gender == true)
+                                            {
+                                                <img class="gender_img" src="~/Img/MaleSymbol.jpg" title="male">
+                                            }
+                                            else
+                                            {
+                                                <img class="gender_img" src="~/Img/Female_Symbol.jpg" title="female">
+                                            }
+                                            <a asp-controller="Animal" asp-action="Details" asp-route-id="@Model.Litter.Parentings[1].Animal.AnimalId">
+                                                <b>
+                                                    @Html.DisplayFor(model => model.Litter.Parentings[1].Animal.PedigreeName)
+                                                </b>
+                                            </a>
+                                        </p>
+                                    }
+                                </td>
+                            </tr>
+
+                            @if (Model.Litter.Parentings.Count != 0 && Model.Litter.Parentings.Count != 1)
+                            {
+                                <!--Grand Parrents-->
+                                <tr>
+                                    <td colspan="2" class="animal">
+                                        <div class="male_animal">&nbsp;</div>
+                                        <div class="tree-photo-ingrus">
+                                            <a><img src="~/Img/banner.jpg" title=""></a>
+                                        </div>
+
+                                        @if (Model.Litter.Parentings[0].Animal.Litter.Parentings.Count == 0)
+                                        {
+                                            @*<a asp-controller="Parenting" asp-action="Create" asp-route-id="@UserManager.GetUserId(User)">Opret Forældre</a>*@
+                                            <a>Opret Forældre</a>
+                                        }
+                                        else
+                                        {
+                                            <p class="title_text">
+                                                @if (Model.Litter.Parentings[0].Animal.Litter.Parentings[0].Animal.Gender == true)
+                                                {
+                                                    <img class="gender_img" src="~/Img/MaleSymbol.jpg" title="male">
+                                                }
+                                                else
+                                                {
+                                                    <img class="gender_img" src="~/Img/Female_Symbol.jpg" title="female">
+                                                }
+                                                <a asp-controller="Animal" asp-action="Details" asp-route-id="@Model.Litter.Parentings[0].Animal.Litter.Parentings[0].Animal.AnimalId">
+                                                    <b>
+                                                        @Html.DisplayFor(model => model.Litter.Parentings[0].Animal.Litter.Parentings[0].Animal.PedigreeName)
+                                                    </b>
+                                                </a>
+                                            </p>
+                                        }
+                                    </td>
+
+                                    <td colspan="2" class="animal">
+                                        <div class="female_animal">&nbsp;</div>
+                                        <div class="tree-photo-ingrus">
+                                            <a><img src="~/Img/banner.jpg" title=""></a>
+                                        </div>
+                                        @if (Model.Litter.Parentings[0].Animal.Litter.Parentings.Count == 0 || Model.Litter.Parentings[0].Animal.Litter.Parentings.Count == 1)
+                                        {
+                                            @*<a asp-controller="Parenting" asp-action="Create" asp-route-id="@UserManager.GetUserId(User)">Opret Forældre</a>*@
+                                            <a>Opret Forældre</a>
+                                        }
+                                        else
+                                        {
+                                            <p class="title_text">
+                                                @if (Model.Litter.Parentings[0].Animal.Litter.Parentings[1].Animal.Gender == true)
+                                                {
+                                                    <img class="gender_img" src="~/Img/MaleSymbol.jpg" title="male">
+                                                }
+                                                else
+                                                {
+                                                    <img class="gender_img" src="~/Img/Female_Symbol.jpg" title="female">
+                                                }
+                                                <a asp-controller="Animal" asp-action="Details" asp-route-id="@Model.Litter.Parentings[0].Animal.Litter.Parentings[1].Animal.AnimalId">
+                                                    <b>
+                                                        @Html.DisplayFor(model => model.Litter.Parentings[0].Animal.Litter.Parentings[1].Animal.PedigreeName)
+                                                    </b>
+                                                </a>
+                                            </p>
+                                        }
+                                    </td>
+
+                                    <td colspan="2" class="animal">
+                                        <div class="male_animal">&nbsp;</div>
+                                        <div class="tree-photo-ingrus">
+                                            <a><img src="~/Img/banner.jpg" title=""></a>
+                                        </div>
+                                        @if (Model.Litter.Parentings[1].Animal.Litter.Parentings.Count == 0)
+                                        {
+                                            @*<a asp-controller="Parenting" asp-action="Create" asp-route-id="@UserManager.GetUserId(User)">Opret Forældre</a>*@
+                                            <a>Opret Forældre</a>
+                                        }
+                                        else
+                                        {
+                                            <p class="title_text">
+                                                @if (Model.Litter.Parentings[1].Animal.Litter.Parentings[0].Animal.Gender == true)
+                                                {
+                                                    <img class="gender_img" src="~/Img/MaleSymbol.jpg" title="male">
+                                                }
+                                                else
+                                                {
+                                                    <img class="gender_img" src="~/Img/Female_Symbol.jpg" title="female">
+                                                }
+                                                <a asp-controller="Animal" asp-action="Details" asp-route-id="@Model.Litter.Parentings[1].Animal.Litter.Parentings[0].Animal.AnimalId">
+                                                    <b>
+                                                        @Html.DisplayFor(model => model.Litter.Parentings[1].Animal.Litter.Parentings[0].Animal.PedigreeName)
+                                                    </b>
+                                                </a>
+                                            </p>
+                                        }
+                                    </td>
+
+                                    <td colspan="2" class="animal">
+                                        <div class="female_animal">&nbsp;</div>
+                                        <div class="tree-photo-ingrus">
+                                            <a><img src="~/Img/banner.jpg" title=""></a>
+                                        </div>
+
+                                        @if (Model.Litter.Parentings[1].Animal.Litter.Parentings.Count == 0 || Model.Litter.Parentings[1].Animal.Litter.Parentings.Count == 1)
+                                        {
+                                            @*<a asp-controller="Parenting" asp-action="Create" asp-route-id="@UserManager.GetUserId(User)">Opret Forældre</a>*@
+                                            <a>Opret Forældre</a>
+                                        }
+                                        else
+                                        {
+                                            <p class="title_text">
+                                                @if (Model.Litter.Parentings[1].Animal.Litter.Parentings[1].Animal.Gender == true)
+                                                {
+                                                    <img class="gender_img" src="~/Img/MaleSymbol.jpg" title="male">
+                                                }
+                                                else
+                                                {
+                                                    <img class="gender_img" src="~/Img/Female_Symbol.jpg" title="female">
+                                                }
+
+                                                <a asp-controller="Animal" asp-action="Details" asp-route-id="@Model.Litter.Parentings[1].Animal.Litter.Parentings[1].Animal.AnimalId">
+                                                    <b>
+                                                        @Html.DisplayFor(model => model.Litter.Parentings[1].Animal.Litter.Parentings[1].Animal.PedigreeName)
+                                                    </b>
+                                                </a>
+                                            </p>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

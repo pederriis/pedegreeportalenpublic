@@ -1,0 +1,387 @@
+{
+  "Routes": [
+    //Race
+    //GetAllRace
+    {
+      "DownstreamPathTemplate": "/GetAllRaces",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/GetAllRaces",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //SubRace
+    //GetAllSubRace
+    {
+      "DownstreamPathTemplate": "/GetAllSubRaces",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/GetAllSubRaces",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //GetAllSubRaceByRaceId
+    {
+      "DownstreamPathTemplate": "/SubRace/GetAllSubRaceById?RaceId={RaceId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/SubRace/GetAllSubRaceById?RaceId={RaceId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //Animal
+    //CreateAnimal
+    {
+      "DownstreamPathTemplate": "/Animal/CreateAnimal?AnimalId={AnimalId}&OwnerId={OwnerId}&SubRaceId={SubRaceId}&RegNo={RegNo}&PedigreeName={PedigreeName}&ShortName={ShortName}&BirthDate={BirthDate}&DeathDate={DeathDate}&Gender={Gender}&Color={Color}&WeightInKg={WeightInKg}&ProfileText={ProfileText}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Animal/CreateAnimal?AnimalId={AnimalId}&OwnerId={OwnerId}&SubRaceId={SubRaceId}&RegNo={RegNo}&PedigreeName={PedigreeName}&ShortName={ShortName}&BirthDate={BirthDate}&DeathDate={DeathDate}&Gender={Gender}&Color={Color}&WeightInKg={WeightInKg}&ProfileText={ProfileText}",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    //UpdateAnimal
+    {
+      "DownstreamPathTemplate": "/Animal/UpdateAnimal?AnimalId={AnimalId}&HumanId={OwnerId}&RegNo={RegNo}&PedigreeName={PedigreeName}&ShortName={ShortName}&BirthDate={BirthDate}&DeathDate={DeathDate}&Gender={Gender}&Color={Color}&WeightInKg={WeightInKg}&IsBreedable={IsBreedable}&ProfileText={ProfileText}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Animal/UpdateAnimal?AnimalId={AnimalId}&HumanId={OwnerId}&RegNo={RegNo}&PedigreeName={PedigreeName}&ShortName={ShortName}&BirthDate={BirthDate}&DeathDate={DeathDate}&Gender={Gender}&Color={Color}&WeightInKg={WeightInKg}&IsBreedable={IsBreedable}&ProfileText={ProfileText}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    //DeleteAnimal
+    {
+      "DownstreamPathTemplate": "/Animal/DeleteAnimal?AnimalId={AnimalId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Animal/DeleteAnimal?AnimalId={AnimalId}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    //AddAnimalToLitter
+    {
+      "DownstreamPathTemplate": "/Animal/AddAnimalToLitter?AnimalId={AnimalId}&LitterId={LitterId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Animal/AddAnimalToLitter?AnimalId={AnimalId}&LitterId={LitterId}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    //GetAllAnimals
+    {
+      "DownstreamPathTemplate": "/GetAllAnimals",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/GetAllAnimals",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //GetAllParentingAnimals
+    {
+      "DownstreamPathTemplate": "/GetAllParentingAnimals",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/GetAllParentingAnimals",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //GetAnimalById
+    {
+      "DownstreamPathTemplate": "/Animal/id?AnimalId={AnimalId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Animal/id?AnimalId={AnimalId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //GetAnimalsBySearchstring
+    {
+      "DownstreamPathTemplate": "/GetAnimalsBySearchstring?searchstring={searchstring}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/GetAnimalsBySearchstring/searchstring?searchstring={searchstring}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //GetAllAnimalByOwnerId
+    {
+      "DownstreamPathTemplate": "/Animal/GetAllAnimalByOwnerId?OwnerId={OwnerId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Animal/GetAllAnimalByOwnerId?OwnerId={OwnerId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //GetSingleAnimalByAnimalId
+    {
+      "DownstreamPathTemplate": "/Animal/GetSingleAnimalByAnimalId?AnimalId={AnimalId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Animal/GetSingleAnimalByAnimalId?AnimalId={AnimalId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //GetAnimalByOwnerId
+    {
+      "DownstreamPathTemplate": "/Animal/GetAnimalByOwnerId?OwnerId={OwnerId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Animal/GetAnimalByOwnerId?OwnerId={OwnerId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //GetAllAnimalByLitterId
+    {
+      "DownstreamPathTemplate": "/Animal/GetAllAnimalByLitterId?LitterId={LitterId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Animal/GetAllAnimalByLitterId?LitterId={LitterId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //GetPedigreeTreeByAnimalId
+    {
+      "DownstreamPathTemplate": "/Animal/GetPedigreeTreeByAnimalId?AnimalId={AnimalId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Animal/GetPedigreeTreeByAnimalId?AnimalId={AnimalId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //GetFullPedegreeTreeByAnimalId
+    {
+      "DownstreamPathTemplate": "/Animal/GetFullPedegreeTreeByAnimalId?AnimalId={AnimalId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Animal/GetFullPedegreeTreeByAnimalId?AnimalId={AnimalId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //Parenting
+    //CreateParenting
+    {
+      "DownstreamPathTemplate": "/Parenting/CreateParenting?ParentingId={ParentingId}&AnimalId={AnimalId}&LitterId={LitterId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Parenting/CreateParenting?ParentingId={ParentingId}&AnimalId={AnimalId}&LitterId={LitterId}",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    //DeleteParenting
+    {
+      "DownstreamPathTemplate": "/Parenting/DeleteParenting?ParentingId={ParentingId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Parenting/DeleteParenting?ParentingId={ParentingId}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    //GetAllParentingsByAnimalId
+    {
+      "DownstreamPathTemplate": "/Parentings/GetAllParentingsByAnimalId?AnimalId={AnimalId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Parentings/GetAllParentingsByAnimalId?AnimalId={AnimalId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //Litter
+    //CreateLitter
+    {
+      "DownstreamPathTemplate": "/Litter/CreateLitter?LitterId={LitterId}&BreedById={BreedById}&LitterName={LitterName}&LitterBirthDate={LitterBirthDate}&MatingDate={MatingDate}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Litter/CreateLitter?LitterId={LitterId}&BreedById={BreedById}&LitterName={LitterName}&LitterBirthDate={LitterBirthDate}&MatingDate={MatingDate}",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    //UpdateLitter
+    {
+      "DownstreamPathTemplate": "/Litter/UpdateLitter?LitterId={LitterId}&LitterName={LitterName}&LitterBirthDate={LitterBirthDate}&MatingDate={MatingDate}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Litter/UpdateLitter?LitterId={LitterId}&LitterName={LitterName}&LitterBirthDate={LitterBirthDate}&MatingDate={MatingDate}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    //DeleteLitter
+    {
+      "DownstreamPathTemplate": "/Litter/DeleteLitter?LitterId={LitterId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Litter/DeleteLitter?LitterId={LitterId}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    //GetAllLitters
+    {
+      "DownstreamPathTemplate": "/GetAllLitters",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/GetAllLitters",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //GetLitterById
+    {
+      "DownstreamPathTemplate": "/Litter/GetLitterById?LitterId={LitterId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Litter/GetLitterById?LitterId={LitterId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //GetLitterByOwnerId
+    {
+      "DownstreamPathTemplate": "/Litter/GetAllLitterByOwnerId?BreedById={BreedById}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Litter/GetAllLitterByOwnerId?BreedById={BreedById}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //GetLitterAnimalsByLitterId
+    {
+      "DownstreamPathTemplate": "/Litter/GetLitterAnimalsByLitterId?LitterId={LitterId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Litter/GetLitterAnimalsByLitterId?LitterId={LitterId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //GetLitterParentingsByLitterId
+    {
+      "DownstreamPathTemplate": "/Litter/GetLitterParentingsByLitterId?LitterId={LitterId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44380
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Litter/GetLitterParentingsByLitterId?LitterId={LitterId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:7000"
+  }
+}

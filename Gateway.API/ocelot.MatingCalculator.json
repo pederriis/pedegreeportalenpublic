@@ -1,0 +1,74 @@
+{
+  "Routes": [
+    //GetDogDetailsFromOwnerId
+    {
+      "DownstreamPathTemplate": "/GetDogDetailsFromOwnerId?ownerid={ownerid}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44326
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/GetDogDetailsFromOwnerId/ownerid?ownerid={ownerid}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //GetAllDogDetailsForMatingCalculation
+    {
+      "DownstreamPathTemplate": "/GetAllDogDetailsForMatingCalculation",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44326
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/GetAllDogDetailsForMatingCalculation",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    //MateTwoDogs
+    {
+      "DownstreamPathTemplate": "/MatingCalculator/MateTwoDogs?MotherDogId={motherdogid}&FatherDogId={fatherdogid}&MatingCalculationId={matingcalculationId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44326
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/MatingCalculator/matetwodogs/motherdogid?motherdogid={motherdogid}&fatherdogid?fatherdogid={fatherdogid}&MatingCalculationId?MatingCalculatorId={matingcalculationId}",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    //GetSingleMatingCalculator
+    {
+      "DownstreamPathTemplate": "/GetSingleMatingCalculator?matingcalculatorId={matingcalculatorId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44326
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/GetSingleMatingCalculator?matingcalculatorId={matingcalculatorId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //GetAllCalculatedDiseaseDetailsFromMatingCalculationId
+    {
+      "DownstreamPathTemplate": "/GetAllCalculatedDiseaseDetailsFromMatingCalculationId?matingCalculationId={matingCalculationId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44326
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/GetAllCalculatedDiseaseDetailsFromMatingCalculationId?matingCalculationId={matingCalculationId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:7000"
+  }
+}

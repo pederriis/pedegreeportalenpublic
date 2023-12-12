@@ -1,0 +1,114 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model PedigreePortalen.UI.Models.AnimalViewModel.CreateAnimal
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="padding_top_bottom background_animal">
+    <div class="container center container_Cud">
+        <h1 class="text-center">Opret ny Hund</h1>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="OwnerId" />
+                    <div>
+                        <label class="control-label">Vælg Race</label>
+                        <br />
+                        <select id="myRaceSelect" asp-items="@(new SelectList(Model.RaceDetails, "RaceId", "RaceName"))">
+                        </select>
+                    </div>
+                    <div>
+                        <label asp-for="SubRaceId" class="control-label">Vælg SubRace</label>
+                        <br />
+                        <select id="mySubRaceSelect" asp-for="SubRaceId" asp-items="@(new SelectList(Model.SubRaceDetails, "SubRaceId", "SubRaceName"))">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RegNo" class="control-label">Registreringsnummer</label>
+                        <input id="input_RegNo" asp-for="RegNo" class="form-control" type="text" placeholder="12544512" />
+                        <span asp-validation-for="RegNo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PedigreeName" class="control-label">Stambogsnavn</label>
+                        <input id="input_PedigreeName" asp-for="PedigreeName" class="form-control" placeholder="Piece of my heart Alba" />
+                        <span asp-validation-for="PedigreeName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShortName" class="control-label">Kaldenavn</label>
+                        <input id="input_ShortName" asp-for="ShortName" class="form-control" placeholder="Alba" />
+                        <span asp-validation-for="ShortName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BirthDate" class="control-label">Fødselsdag</label>
+                        <input id="input_BirthDate" asp-for="BirthDate" class="form-control" />
+                        <span id="input_BirthDate_validation" asp-validation-for="BirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DeathDate" class="control-label">Dødsdag</label>
+                        <input id="input_DeathDate" asp-for="DeathDate" class="form-control" />
+                        <span id="input_DeathDate_validation" asp-validation-for="DeathDate" class="text-danger"></span>
+                    </div>
+
+                    <label asp-for="Gender" class="control-label">Køn</label>
+                    <div class="form-check">
+                        <input asp-for="Gender" class="form-check-input" type="radio" value="true">
+                        <span id="input_Gender_validation" asp-validation-for="Gender" class="text-danger"></span>
+                        <label asp-for="Gender" class="form-check-label">
+                            Han
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="Gender" class="form-check-input" type="radio" value="false" checked>
+                        <span id="input_Gender_validation" asp-validation-for="Gender" class="text-danger"></span>
+                        <label asp-for="Gender" class="form-check-label">
+                            Hun
+                        </label>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="Color" class="control-label">Farve</label>
+                        <input id="input_Color" asp-for="Color" class="form-control" placeholder="chokofawn" />
+                        <span id="input_Color_validation" asp-validation-for="Color" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="WeightInKg" class="control-label">Vægt i Kg</label>
+                        <input id="input_WeightInKg" asp-for="WeightInKg" class="form-control" placeholder="4.5" />
+                        <span id="input_WeightInKg_validation" asp-validation-for="WeightInKg" class="text-danger"></span>
+                    </div>
+                    <label asp-for="IsBreedable" class="control-label">Avls Klar</label>
+                    <div class="form-check">
+                        <input asp-for="IsBreedable" class="form-check-input" type="radio" value="true">
+                        <label asp-for="IsBreedable" class="form-check-label">
+                            Ja
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="IsBreedable" class="form-check-input" type="radio" value="false" checked>
+                        <label asp-for="IsBreedable" class="form-check-label">
+                            Nej
+                        </label>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label asp-for="ProfileText">Profiltext</label>
+                        <textarea asp-for="ProfileText" class="form-control" rows="3" placeholder="Jeg er en glad hund"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input asp-route-id="@UserManager.GetUserId(User)" id="animal_submit" type="submit" value="Opret" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center">
+            <a asp-controller="User" asp-action="Details" asp-route-id="@UserManager.GetUserId(User)">Tilbage til Min Profil</a>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

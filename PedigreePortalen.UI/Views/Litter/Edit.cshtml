@@ -1,0 +1,47 @@
+﻿@model PedigreePortalen.UI.Models.LitterViewModel.LitterDetails
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="padding_top_bottom background_animal">
+    <div class="container center container_Cud">
+        <h1 class="text-center">Ret hund</h1>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="LitterId" />
+                    <input type="hidden" asp-for="BreedById" />
+                    <div class="form-group">
+                        <label asp-for="LitterName" class="control-label">Navn</label>
+                        <input id="input_Name" asp-for="LitterName" class="form-control" />
+                        <span asp-validation-for="LitterName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="LitterBirthDate" class="control-label">Kuld Fødselsdag</label>
+                        <input id="input_LitterBirthDate" asp-for="LitterBirthDate" class="form-control" />
+                        <span id="input_LitterBirthDate_validation" asp-validation-for="LitterBirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MatingDate" class="control-label">Parrings dato</label>
+                        <input id="input_MatingDate" asp-for="MatingDate" class="form-control" />
+                        <span id="input_MatingDate_validation" asp-validation-for="MatingDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Gem" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center">
+            <a asp-action="Details" asp-route-id="@Model.LitterId">Tilbage til Kuld</a>
+            <p><a asp-action="Delete" asp-route-id="@Model.LitterId">Slet Kuld</a></p>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

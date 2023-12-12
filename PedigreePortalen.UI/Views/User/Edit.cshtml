@@ -1,0 +1,73 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model PedigreePortalen.UI.Models.UserViewModel.UserDetails
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="padding_top_bottom background_animal">
+    <div class="container center container_Cud">
+        <h1 class="text-center">Ret Bruger</h1>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="UserId" />
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label">Fornavn</label>
+                        <input id="input_FirstName" asp-for="FirstName" class="form-control" placeholder="Klaus" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label">Efternavn</label>
+                        <input id="input_LastName" asp-for="LastName" class="form-control" type="text" placeholder="Jensen" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label">E-mail</label>
+                        <input id="input_Email" asp-for="Email" class="form-control" placeholder="Test@hotmail.com" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNo" class="control-label">Telefonnr</label>
+                        <input id="input_PhoneNo" asp-for="PhoneNo" class="form-control" placeholder="78787878" />
+                        <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Street" class="control-label">Vejnavn og Nr</label>
+                        <input id="input_Street" asp-for="Street" class="form-control" placeholder="Vejlevej 8" />
+                        <span id="input_Street_validation" asp-validation-for="Street" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="City" class="control-label">By</label>
+                        <input id="input_City" asp-for="City" class="form-control" placeholder="Kolding" />
+                        <span id="input_City_validation" asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Zipcode" class="control-label">Postnummer</label>
+                        <input id="input_Zipcode" asp-for="Zipcode" class="form-control" placeholder="6000" />
+                        <span id="input_Zipcode_validation" asp-validation-for="Zipcode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProfileText">Profiltext</label>
+                        <textarea asp-for="ProfileText" class="form-control" rows="3" placeholder="Jeg elsker dyr"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Gem" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center">
+            <a asp-action="Details" asp-route-id="@UserManager.GetUserId(User)">Tilbage til Min Side</a>
+            <p><a asp-action="Delete" asp-route-id="@Model.UserId">Slet bruger</a></p>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

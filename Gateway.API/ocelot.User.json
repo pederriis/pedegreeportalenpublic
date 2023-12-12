@@ -1,0 +1,85 @@
+{
+  "Routes": [
+    //GetAllUsers
+    {
+      "DownstreamPathTemplate": "/getallusers",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44332
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/getallusers",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //GetUserByUserId
+    {
+      "DownstreamPathTemplate": "/User/GetUserByUserId?UserId={UserId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44332
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/User/GetUserByUserId?UserId={UserId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //GetUserByLoginUserId
+    {
+      "DownstreamPathTemplate": "/User/GetUserByLoginUserId?LoginUserId={LoginUserId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44332
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/User/GetUserByLoginUserId?LoginUserId={LoginUserId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //CreateUser
+    {
+      "DownstreamPathTemplate": "/User/CreateUser?UserId={UserId}&LoginUserId={LoginUserId}&FirstName={FirstName}&LastName={LastName}&Email={Email}&PhoneNo={PhoneNo}&Street={Street}&City={City}&Zipcode={Zipcode}&ProfileText={ProfileText}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44332
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/User/CreateUser?UserId={UserId}&LoginUserId={LoginUserId}&FirstName={FirstName}&LastName={LastName}&Email={Email}&PhoneNo={PhoneNo}&Street={Street}&City={City}&Zipcode={Zipcode}&ProfileText={ProfileText}",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    //UpdateUser
+    {
+      "DownstreamPathTemplate": "/User/UpdateUser?UserId={UserId}&FirstName={FirstName}&LastName={LastName}&Email={Email}&PhoneNo={PhoneNo}&Street={Street}&City={City}&Zipcode={Zipcode}&ProfileText={ProfileText}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44332
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/User/UpdateUser?UserId={UserId}&FirstName={FirstName}&LastName={LastName}&Email={Email}&PhoneNo={PhoneNo}&Street={Street}&City={City}&Zipcode={Zipcode}&ProfileText={ProfileText}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    //DeleteUser
+    {
+      "DownstreamPathTemplate": "/User/DeleteUser?UserId={UserId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44332
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/User/DeleteUser?UserId={UserId}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:7000"
+  }
+}

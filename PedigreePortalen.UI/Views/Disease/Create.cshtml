@@ -1,0 +1,65 @@
+﻿@model PedigreePortalen.UI.Models.DiseaseViewModel.CreateDisease
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="padding_top_bottom background_animal">
+    <div class="container center container_Cud">
+        <h1 class="text-center">Tilføj ny sygdom</h1>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="HealthRecordId" />
+                    @*<input type="hidden" asp-for="Name" />*@
+
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">Navn</label>
+                        <input id="input_Name" asp-for="Name" class="form-control" type="text" placeholder="paradentose" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Note" class="control-label">Beskrivelse</label>
+                        <input id="input_Note" asp-for="Note" class="form-control" type="text" placeholder="Er ikke rart" />
+                        <span asp-validation-for="Note" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Date" class="control-label">Dato</label>
+                        <input id="input_BirthDate" asp-for="Date" class="form-control" />
+                        <span id="input_BirthDate_validation" asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+                    <label asp-for="IsHereditary" class="control-label">Arvelighed</label>
+                    <label asp-for="IsHereditary" class="control-label">Er arvelig</label>
+                    <div class="form-check">
+                        <input asp-for="IsHereditary" class="form-check-input" type="radio" value="true">
+                        <span id="input_Gender_validation" asp-validation-for="IsHereditary" class="text-danger"></span>
+                        <label asp-for="IsHereditary" class="form-check-label">
+                            Ja
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="IsHereditary" class="form-check-input" type="radio" value="false" checked>
+                        <span id="input_Gender_validation" asp-validation-for="IsHereditary" class="text-danger"></span>
+                        <label asp-for="IsHereditary" class="form-check-label">
+                            Nej
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input asp-route-id=@Model.HealthRecordId asp-route-animalId=@ViewBag.animalId id="disease_submit" type="submit" value="Opret" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center">
+            @*<a asp-controller="User" asp-action="Details" asp-route-id="@UserManager.GetUserId(User)">Tilbage til Min Profil</a>*@
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

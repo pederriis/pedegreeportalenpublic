@@ -1,0 +1,62 @@
+﻿@model PedigreePortalen.UI.Models.HealthRecordViewModel.HelthRecordDetails
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Sundhedsjournal</h1>
+
+<div class="container center container_calculated_diseases">
+    <h4>Sygdomme</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Sygdom
+                </th>
+                <th>
+                    Dato
+                </th>
+                <th>
+                    Note
+                </th>
+                <th>
+                    Er arvelig
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Diseases)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                @if (item.IsHereditary == true)
+                {
+                    <td>
+                        Ja
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Nej
+                    </td>
+                }
+
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<a asp-controller="Animal" asp-action="Details" asp-route-id="@Model.AnimalId">Tilbage til hund</a> |
+<a asp-controller="Disease" asp-action="Create" asp-route-id="@Model.HealthRecordId" asp-route-animalId=@Model.AnimalId>Tilføj sygdom</a>

@@ -1,0 +1,35 @@
+﻿@model PedigreePortalen.UI.Models.AnimalViewModel.AddLitterToAnimal
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="padding_top_bottom background_animal">
+    <div class="container center container_Cud">
+        <h1 class="text-center">Tilføj Hund til Kuld.</h1>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="AddLitterToAnimal">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="AnimalId" />
+                    <div>
+                        <label asp-for="LitterId" class="control-label">Vælg kuld, hund er barn af</label>
+                        <br />
+                        <select id="mySubRaceSelect" asp-for="LitterId" asp-items="@(new SelectList(Model.Litters, "LitterId", "LitterName"))">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input id="animal_submit" type="submit" value="Opret" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="text-center">
+            <a asp-controller="Animal" asp-action="Details" asp-route-id="@Model.AnimalId">Tilbage til Hund</a>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

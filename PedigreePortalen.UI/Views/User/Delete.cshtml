@@ -1,0 +1,22 @@
+﻿@model PedigreePortalen.UI.Models.UserViewModel.UserDetails
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<div class="padding_top_bottom">
+    <div class="container center container_delete">
+
+        <h1 class="text-center">Slet Bruger</h1>
+
+        <h3 style="color:red">Er du sikker på du vil slette @Model.FirstName @Model.LastName ?</h3>
+        <div>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="UserId" />
+                <input type="submit" value="Slet" class="btn btn-danger" /> |
+                <a asp-controller="Home" asp-action="Index">Tilbage til forsiden</a>
+            </form>
+        </div>
+    </div>
+</div>

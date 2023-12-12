@@ -1,0 +1,106 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using System;
+using System.Threading.Tasks;
+using Animal.Infrastructure.Query;
+using Animal.Infrastructure.QueryModels;
+
+namespace Animal.Microservice.Controllers.Querys
+{
+    [Route("/Litter")]
+    public class LitterController : Controller
+    {
+        private readonly static ILogger _log = Log.ForContext<LitterController>();
+        private readonly LitterQuerys _litterQuerys;
+
+        public LitterController(LitterQuerys litterQuerys)
+        {
+            _litterQuerys = litterQuerys;
+        }
+
+        [Route("/GetAllLitters")]
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                var model = await _litterQuerys.GetAllLitters();
+                return new OkObjectResult(model);
+            }
+            catch (Exception e)
+            {
+                return Errorhandling(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetLitterById")]
+        public async Task<IActionResult> Get(LitterQueryModel.GetLitterByLitterId request)
+        {
+            try
+            {
+                var model = await _litterQuerys.GetLitterById(request);
+                return new OkObjectResult(model);
+            }
+            catch (Exception e)
+            {
+                return Errorhandling(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetAllLitterByOwnerId")]
+        public async Task<IActionResult> Get(LitterQueryModel.GetLitterByOwnerId request)
+        {
+            try
+            {
+                var model = await _litterQuerys.GetAllLitterByOwnerId(request);
+                return new OkObjectResult(model);
+            }
+            catch (Exception e)
+            {
+                return Errorhandling(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetParentingsByLitterId")]
+        public async Task<IActionResult> Get(LitterQueryModel.GetParentingsByLitterId request)
+        {
+            try
+            {
+                var model = await _litterQuerys.GetParentingsByLitterId(request);
+                return new OkObjectResult(model);
+            }
+            catch (Exception e)
+            {
+                return Errorhandling(e);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetLitterAnimalsByLitterId")]
+        public async Task<IActionResult> Get(LitterQueryModel.GetLitterAnimalsByLitterId request)
+        {
+            try
+            {
+                var model = await _litterQuerys.GetLitterAnimalsByLitterId(request);
+                return new OkObjectResult(model);
+            }
+            catch (Exception e)
+            {
+                return Errorhandling(e);
+            }
+        }
+
+        private IActionResult Errorhandling(Exception e)
+        {
+            _log.Error(e, "Error handling the query");
+            return new BadRequestObjectResult(new
+            {
+                error = e.Message,
+                stackTrace = e.StackTrace
+            });
+        }
+    }
+}

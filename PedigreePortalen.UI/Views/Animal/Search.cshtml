@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1>Søg efter vovser</h1>
+
+<form asp-controller="Animal" asp-action="Index">
+    <p>
+        Søg på vovser: <input type="text" name="searchstring">
+
+        <input type="submit" value="Vuf!" />
+    </p>
+</form>

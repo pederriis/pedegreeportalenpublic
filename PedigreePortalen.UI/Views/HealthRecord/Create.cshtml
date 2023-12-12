@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Der er oprettet en sundhedsjournal.</h2>
+
+<a asp-controller="HealthRecord" asp-route-animalId=@ViewBag.animalid asp-action="Details">Videre til sundhedsjournal</a>
+<a asp-controller="Animal" asp-route-id=@ViewBag.animalid asp-action="Details">Tilbage til hundeoversigt</a>
+

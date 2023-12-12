@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model PedigreePortalen.UI.Models.LitterViewModel.LitterDetails
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<div class="padding_top_bottom">
+    <div class="container center container_delete">
+
+        <h1 class="text-center">Slet Kuld</h1>
+
+        <h3 style="color:red">Er du sikker på du vil slette @Model.LitterName Kuld?</h3>
+        <div>
+            <form asp-action="Delete" asp-route-id="@UserManager.GetUserId(User)">
+                <input type="hidden" asp-for="LitterId" />
+                <input type="submit" value="Slet" class="btn btn-danger" /> |
+                <a asp-action="Details" asp-route-id="@Model.LitterId">Tilbage til Kuld</a>
+            </form>
+        </div>
+    </div>
+</div>
